@@ -50,9 +50,40 @@ button,input{font:inherit}button{cursor:pointer;border:0;font-weight:750;transit
   }
 }
 
+
+/* Optional Smart Discovery panel */
+.discovery-card{margin:0 0 18px;padding:16px;border-color:#4a3868;background:linear-gradient(125deg,#1b1530,#11111a)}
+.discovery-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.discovery-top h3{margin:0;font-size:17px}
+.discovery-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}
+.discovery-fields label{display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--muted)}
+.discovery-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.discovery-result{border:1px solid var(--line);border-radius:12px;padding:11px;background:#0b0b13;min-width:0}
+.discovery-result b{display:block;font-size:13px;margin-bottom:5px;overflow-wrap:anywhere}
+.discovery-result p{font-size:11px;color:var(--muted);line-height:1.45;margin:0 0 8px}
+@media(max-width:420px){.discovery-fields{grid-template-columns:1fr}.discovery-results{grid-template-columns:1fr}.discovery-top{align-items:flex-start}}
+
 </style></head>
 <body><div class="wrap">
 <header><div class="brand"><div class="logo">🎬</div><div><h1>CinePick</h1><p>YOUR NEXT MOVIE, LEFT TO CHANCE</p></div></div><div class="pill">✦ PERSONAL MOVIE ROULETTE</div></header>
+<section class="card discovery-card" id="smartDiscovery">
+  <div class="discovery-top">
+    <div><h3>🧠 Smart Discovery</h3><p class="sub" style="margin:5px 0 0">Find something that fits your mood, time, and taste — only when you want to.</p></div>
+    <button class="btn primary" id="toggleDiscovery" aria-expanded="false" aria-controls="discoveryPanel">Explore →</button>
+  </div>
+  <div id="discoveryPanel" hidden>
+    <div class="discovery-fields">
+      <label>Mood<select class="input" id="discoveryMood"><option value="any">Any mood</option><option value="mind">Mind-bending</option><option value="dark">Dark / intense</option><option value="feel">Feel-good</option><option value="emotional">Emotional</option><option value="funny">Funny</option><option value="relax">Relaxing</option></select></label>
+      <label>Genre<select class="input" id="discoveryGenre"><option value="any">Any genre</option><option>Action</option><option>Adventure</option><option>Animation</option><option>Comedy</option><option>Crime</option><option>Drama</option><option>Fantasy</option><option>Horror</option><option>Mystery</option><option>Romance</option><option>Sci-Fi</option><option>Thriller</option><option>Documentary</option></select></label>
+      <label>Runtime<select class="input" id="discoveryRuntime"><option value="any">Any length</option><option value="short">Under 90 min</option><option value="medium">90–120 min</option><option value="long">Over 120 min</option></select></label>
+      <label>Minimum TMDB rating<select class="input" id="discoveryRating"><option value="0">Any rating</option><option value="6">6+</option><option value="7">7+</option><option value="8">8+</option></select></label>
+    </div>
+    <label class="checkrow"><input type="checkbox" id="discoveryUnwatched" checked><span>Prefer movies I haven't watched</span></label>
+    <div class="toolbar"><button class="btn primary" id="findDiscovery">✨ Find my movie</button><button class="btn" id="closeDiscovery">Close</button></div>
+    <div class="discovery-results" id="discoveryResults" aria-live="polite"></div>
+    <p class="note">Uses information already saved in CinePick. Missing metadata isn't guessed; add/fetch movie details to improve matches.</p>
+  </div>
+</section>
 <section class="hero"><div class="eyebrow">TONIGHT'S BIG QUESTION</div><h2>Stop scrolling.<br><span>Start watching.</span></h2><p>Your movie collection is loaded. Spin the wheel, then decide whether to keep or remove the pick.</p></section>
 <main class="grid"><section class="card"><h3>🎰 Movie roulette</h3><p class="sub">Every available movie has an equal chance of being selected.</p>
 <div class="wheelbox"><div class="wheelwrap"><div class="pointer"></div><div class="wheel" id="wheel"><canvas id="canvas" width="700" height="700"></canvas></div><button class="spinbtn" id="spin">SPIN<br>THE WHEEL</button></div></div><p class="wheelhint" id="hint">Ready when you are.</p><div class="toolbar" style="justify-content:center"><label class="checkrow" style="margin:5px 0"><input type="checkbox" id="soundOn" checked><span>🔊 Cinematic sound effects</span></label></div>
@@ -192,6 +223,44 @@ $('resetHistory').onclick=()=>{state.history=[];save();render();};
 $('refreshGallery').onclick=renderGallery;$('exportStats').onclick=()=>{const data={generatedAt:new Date().toISOString(),collection:state.movies.length,watched:state.watched.length,ratings:Object.values(state.details).map(d=>Number(d.rating)).filter(n=>n>0),details:state.details,watchedTitles:state.watched};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cinepick-stats.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
 $('exportBackup').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cinepick-full-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
 $('export').onclick=()=>{const blob=new Blob([state.movies.map(m=>(state.watched.some(x=>norm(x)===norm(m))?'[v] ':'[ ] ')+m).join('\n')],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cinepick-movie-list.txt';a.click();URL.revokeObjectURL(a.href);};
+
+// Optional Smart Discovery: closed by default; only searches the user's saved collection.
+function runSmartDiscovery(){
+ const box=$('discoveryResults'); if(!box)return; box.innerHTML='';
+ const mood=$('discoveryMood').value, genre=$('discoveryGenre').value;
+ const runtime=$('discoveryRuntime').value, minRating=Number($('discoveryRating').value);
+ const preferUnwatched=$('discoveryUnwatched').checked;
+ const candidates=state.movies.filter(m=>{
+   if(state.removed.some(x=>norm(x)===norm(m)))return false;
+   if(preferUnwatched&&state.watched.some(x=>norm(x)===norm(m)))return false;
+   const d=state.details[m]||{};
+   if(minRating && Number(d.tmdbRating||0)<minRating)return false;
+   if(genre!=='any' && !(String(d.genre||d.genres||'').toLowerCase().includes(genre.toLowerCase())))return false;
+   const mins=Number(d.runtime||0);
+   if(runtime==='short'&&(!mins||mins>=90))return false;
+   if(runtime==='medium'&&(!mins||mins<90||mins>120))return false;
+   if(runtime==='long'&&(!mins||mins<=120))return false;
+   if(mood!=='any'){
+     const tags=(String(d.mood||'')+' '+String(d.genres||d.genre||'')+' '+String(d.synopsis||'')).toLowerCase();
+     const terms={mind:['mind','psychological','mystery','thriller','twist'],dark:['dark','crime','horror','thriller','intense'],feel:['comedy','family','feel-good','feel good','adventure'],emotional:['drama','emotional','romance','family'],funny:['comedy','funny'],relax:['relax','comedy','romance','feel-good']};
+     if(!terms[mood].some(t=>tags.includes(t)))return false;
+   }
+   return true;
+ });
+ if(!candidates.length){box.innerHTML='<div class="empty">No confident matches with those filters yet. Try widening your choices or fetch more TMDB details.</div>';return;}
+ // Prefer stronger saved ratings when available, then randomize among the best candidates.
+ const shuffled=candidates.map(m=>({m,score:Number((state.details[m]||{}).tmdbRating||0)+Math.random()*1.5})).sort((a,b)=>b.score-a.score).slice(0,6);
+ shuffled.forEach(({m})=>{
+   const d=state.details[m]||{}, card=document.createElement('article');card.className='discovery-result';
+   const title=document.createElement('b');title.textContent=m;card.appendChild(title);
+   const meta=document.createElement('p');meta.textContent=[d.year||'',d.runtime?(d.runtime+' min'):'',d.tmdbRating?('TMDB ★ '+Number(d.tmdbRating).toFixed(1)):''].filter(Boolean).join(' · ')||'More details not fetched yet';card.appendChild(meta);
+   const btn=document.createElement('button');btn.className='btn';btn.textContent='View details';btn.onclick=()=>{if(typeof openTracker==='function')openTracker(m);else{const tracker=$('tracker');if(tracker)tracker.scrollIntoView({behavior:'smooth'});}};card.appendChild(btn);box.appendChild(card);
+ });
+}
+$('toggleDiscovery').onclick=()=>{const p=$('discoveryPanel'),open=p.hidden;p.hidden=!open;$('toggleDiscovery').textContent=open?'Hide discovery ↑':'Explore →';$('toggleDiscovery').setAttribute('aria-expanded',String(open));};
+$('closeDiscovery').onclick=()=>{$('discoveryPanel').hidden=true;$('toggleDiscovery').textContent='Explore →';$('toggleDiscovery').setAttribute('aria-expanded','false');};
+$('findDiscovery').onclick=runSmartDiscovery;
+
 render();
 
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
