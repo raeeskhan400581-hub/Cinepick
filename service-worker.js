@@ -1,4 +1,4 @@
-const CACHE_NAME = "cinepick-offline-v5";
+const CACHE_NAME = "cinepick-offline-v6";
 const APP_FILES = [
   "./",
   "./index.html",
