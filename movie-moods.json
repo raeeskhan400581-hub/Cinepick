@@ -1,0 +1,1122 @@
+{
+  "schemaVersion": 1,
+  "title": "CinePick Curated Mood Database",
+  "description": "A hand-curated starter set of movie moods for recommendation filtering. These tags are editorial judgments, not official ratings or a claim of objective truth. Expand and review over time.",
+  "matchingKey": "tmdbId",
+  "moodFields": {
+    "primaryMoods": "Strongest viewing emotions or overall feel.",
+    "secondaryMoods": "Important additional moods, tones, or storytelling characteristics.",
+    "avoidIf": "Situations or viewing preferences for which this movie is a poor fit."
+  },
+  "movies": [
+    {
+      "tmdbId": 496243,
+      "title": "Parasite",
+      "year": 2019,
+      "primaryMoods": [
+        "dark",
+        "tense",
+        "satirical"
+      ],
+      "secondaryMoods": [
+        "suspenseful",
+        "unpredictable",
+        "social-commentary"
+      ],
+      "avoidIf": [
+        "lighthearted",
+        "comforting",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 157336,
+      "title": "Interstellar",
+      "year": 2014,
+      "primaryMoods": [
+        "awe-inspiring",
+        "emotional",
+        "thought-provoking"
+      ],
+      "secondaryMoods": [
+        "hopeful",
+        "tense",
+        "melancholic"
+      ],
+      "avoidIf": [
+        "light-easy-watch"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 27205,
+      "title": "Inception",
+      "year": 2010,
+      "primaryMoods": [
+        "mind-bending",
+        "tense",
+        "intricate"
+      ],
+      "secondaryMoods": [
+        "action-packed",
+        "mysterious",
+        "somber"
+      ],
+      "avoidIf": [
+        "relaxing",
+        "simple-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 1124,
+      "title": "The Prestige",
+      "year": 2006,
+      "primaryMoods": [
+        "mysterious",
+        "mind-bending",
+        "dark"
+      ],
+      "secondaryMoods": [
+        "competitive",
+        "tense",
+        "tragic"
+      ],
+      "avoidIf": [
+        "feel-good",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 210577,
+      "title": "Gone Girl",
+      "year": 2014,
+      "primaryMoods": [
+        "dark",
+        "tense",
+        "psychological"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "unsettling",
+        "satirical"
+      ],
+      "avoidIf": [
+        "comforting",
+        "romantic",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 807,
+      "title": "Se7en",
+      "year": 1995,
+      "primaryMoods": [
+        "bleak",
+        "disturbing",
+        "tense"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "violent",
+        "psychological"
+      ],
+      "avoidIf": [
+        "uplifting",
+        "comforting",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 146233,
+      "title": "Prisoners",
+      "year": 2013,
+      "primaryMoods": [
+        "intense",
+        "dark",
+        "tense"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "morally-complex",
+        "disturbing"
+      ],
+      "avoidIf": [
+        "relaxing",
+        "feel-good",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 244786,
+      "title": "Whiplash",
+      "year": 2014,
+      "primaryMoods": [
+        "intense",
+        "stressful",
+        "driven"
+      ],
+      "secondaryMoods": [
+        "ambitious",
+        "dark",
+        "electrifying"
+      ],
+      "avoidIf": [
+        "relaxing",
+        "comforting"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 38,
+      "title": "Eternal Sunshine of the Spotless Mind",
+      "year": 2004,
+      "primaryMoods": [
+        "bittersweet",
+        "romantic",
+        "melancholic"
+      ],
+      "secondaryMoods": [
+        "surreal",
+        "thought-provoking",
+        "tender"
+      ],
+      "avoidIf": [
+        "simple-romance",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 313369,
+      "title": "La La Land",
+      "year": 2016,
+      "primaryMoods": [
+        "romantic",
+        "bittersweet",
+        "dreamy"
+      ],
+      "secondaryMoods": [
+        "uplifting",
+        "melancholic",
+        "musical"
+      ],
+      "avoidIf": [
+        "guaranteed-happy-ending"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 122906,
+      "title": "About Time",
+      "year": 2013,
+      "primaryMoods": [
+        "warm",
+        "romantic",
+        "emotional"
+      ],
+      "secondaryMoods": [
+        "funny",
+        "hopeful",
+        "bittersweet"
+      ],
+      "avoidIf": [
+        "dark-thriller"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 489,
+      "title": "Good Will Hunting",
+      "year": 1997,
+      "primaryMoods": [
+        "moving",
+        "intimate",
+        "hopeful"
+      ],
+      "secondaryMoods": [
+        "melancholic",
+        "thought-provoking",
+        "warm"
+      ],
+      "avoidIf": [
+        "action-packed",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 278,
+      "title": "The Shawshank Redemption",
+      "year": 1994,
+      "primaryMoods": [
+        "hopeful",
+        "moving",
+        "inspiring"
+      ],
+      "secondaryMoods": [
+        "somber",
+        "tense",
+        "friendship"
+      ],
+      "avoidIf": [
+        "light-easy-watch"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 497,
+      "title": "The Green Mile",
+      "year": 1999,
+      "primaryMoods": [
+        "emotional",
+        "tragic",
+        "compassionate"
+      ],
+      "secondaryMoods": [
+        "supernatural",
+        "somber",
+        "hopeful"
+      ],
+      "avoidIf": [
+        "lighthearted",
+        "comforting"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 354912,
+      "title": "Coco",
+      "year": 2017,
+      "primaryMoods": [
+        "warm",
+        "emotional",
+        "uplifting"
+      ],
+      "secondaryMoods": [
+        "funny",
+        "musical",
+        "family-friendly"
+      ],
+      "avoidIf": [
+        "dark",
+        "adult-thriller"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 14160,
+      "title": "Up",
+      "year": 2009,
+      "primaryMoods": [
+        "heartwarming",
+        "adventurous",
+        "emotional"
+      ],
+      "secondaryMoods": [
+        "funny",
+        "hopeful",
+        "bittersweet"
+      ],
+      "avoidIf": [
+        "dark-thriller"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 150540,
+      "title": "Inside Out",
+      "year": 2015,
+      "primaryMoods": [
+        "thoughtful",
+        "warm",
+        "emotional"
+      ],
+      "secondaryMoods": [
+        "funny",
+        "family-friendly",
+        "hopeful"
+      ],
+      "avoidIf": [
+        "adult-thriller"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 152601,
+      "title": "Her",
+      "year": 2013,
+      "primaryMoods": [
+        "intimate",
+        "melancholic",
+        "thought-provoking"
+      ],
+      "secondaryMoods": [
+        "romantic",
+        "lonely",
+        "dreamy"
+      ],
+      "avoidIf": [
+        "fast-paced",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 329865,
+      "title": "Arrival",
+      "year": 2016,
+      "primaryMoods": [
+        "contemplative",
+        "awe-inspiring",
+        "emotional"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "tense",
+        "melancholic"
+      ],
+      "avoidIf": [
+        "action-heavy",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 530385,
+      "title": "Midsommar",
+      "year": 2019,
+      "primaryMoods": [
+        "disturbing",
+        "dread-filled",
+        "surreal"
+      ],
+      "secondaryMoods": [
+        "dark",
+        "grief-focused",
+        "unsettling"
+      ],
+      "avoidIf": [
+        "comforting",
+        "lighthearted",
+        "squeamish"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 419430,
+      "title": "Get Out",
+      "year": 2017,
+      "primaryMoods": [
+        "tense",
+        "unsettling",
+        "satirical"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "darkly-funny",
+        "social-commentary"
+      ],
+      "avoidIf": [
+        "comforting",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 44214,
+      "title": "Black Swan",
+      "year": 2010,
+      "primaryMoods": [
+        "psychological",
+        "unsettling",
+        "intense"
+      ],
+      "secondaryMoods": [
+        "dark",
+        "surreal",
+        "tragic"
+      ],
+      "avoidIf": [
+        "relaxing",
+        "feel-good"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 475557,
+      "title": "Joker",
+      "year": 2019,
+      "primaryMoods": [
+        "bleak",
+        "disturbing",
+        "psychological"
+      ],
+      "secondaryMoods": [
+        "tragic",
+        "tense",
+        "social-commentary"
+      ],
+      "avoidIf": [
+        "uplifting",
+        "lighthearted",
+        "comforting"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 37165,
+      "title": "The Truman Show",
+      "year": 1998,
+      "primaryMoods": [
+        "thought-provoking",
+        "hopeful",
+        "whimsical"
+      ],
+      "secondaryMoods": [
+        "satirical",
+        "emotional",
+        "mysterious"
+      ],
+      "avoidIf": [
+        "dark-horror",
+        "very-intense-action"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 545611,
+      "title": "Everything Everywhere All at Once",
+      "year": 2022,
+      "primaryMoods": [
+        "chaotic",
+        "mind-bending",
+        "emotional"
+      ],
+      "secondaryMoods": [
+        "absurdist",
+        "action-packed",
+        "warm"
+      ],
+      "avoidIf": [
+        "subtle",
+        "slow",
+        "low-stimulation"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 120467,
+      "title": "The Grand Budapest Hotel",
+      "year": 2014,
+      "primaryMoods": [
+        "whimsical",
+        "stylish",
+        "witty"
+      ],
+      "secondaryMoods": [
+        "melancholic",
+        "adventurous",
+        "darkly-funny"
+      ],
+      "avoidIf": [
+        "naturalistic",
+        "straightforward-realism"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 546554,
+      "title": "Knives Out",
+      "year": 2019,
+      "primaryMoods": [
+        "playful",
+        "mysterious",
+        "witty"
+      ],
+      "secondaryMoods": [
+        "suspenseful",
+        "satirical",
+        "ensemble-driven"
+      ],
+      "avoidIf": [
+        "serious-grim-drama",
+        "horror"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 290250,
+      "title": "The Nice Guys",
+      "year": 2016,
+      "primaryMoods": [
+        "funny",
+        "chaotic",
+        "witty"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "action-packed",
+        "darkly-funny"
+      ],
+      "avoidIf": [
+        "family-friendly",
+        "gentle"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 8363,
+      "title": "Superbad",
+      "year": 2007,
+      "primaryMoods": [
+        "raunchy-funny",
+        "chaotic",
+        "youthful"
+      ],
+      "secondaryMoods": [
+        "awkward",
+        "warm",
+        "friendship"
+      ],
+      "avoidIf": [
+        "family-friendly",
+        "subtle",
+        "clean-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 18785,
+      "title": "The Hangover",
+      "year": 2009,
+      "primaryMoods": [
+        "raucous-funny",
+        "chaotic",
+        "absurd"
+      ],
+      "secondaryMoods": [
+        "mystery",
+        "adult-humour",
+        "buddy-comedy"
+      ],
+      "avoidIf": [
+        "family-friendly",
+        "gentle",
+        "clean-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 396263,
+      "title": "Paddington 2",
+      "year": 2017,
+      "primaryMoods": [
+        "joyful",
+        "heartwarming",
+        "gentle"
+      ],
+      "secondaryMoods": [
+        "funny",
+        "adventurous",
+        "family-friendly"
+      ],
+      "avoidIf": [
+        "dark",
+        "disturbing"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 773,
+      "title": "Little Miss Sunshine",
+      "year": 2006,
+      "primaryMoods": [
+        "bittersweet",
+        "warm",
+        "quirky"
+      ],
+      "secondaryMoods": [
+        "funny",
+        "awkward",
+        "moving"
+      ],
+      "avoidIf": [
+        "big-action",
+        "pure-slapstick"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 77338,
+      "title": "The Intouchables",
+      "year": 2011,
+      "primaryMoods": [
+        "heartwarming",
+        "funny",
+        "uplifting"
+      ],
+      "secondaryMoods": [
+        "emotional",
+        "friendship",
+        "inspiring"
+      ],
+      "avoidIf": [
+        "dark-thriller",
+        "horror"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 1402,
+      "title": "The Pursuit of Happyness",
+      "year": 2006,
+      "primaryMoods": [
+        "inspiring",
+        "emotional",
+        "hopeful"
+      ],
+      "secondaryMoods": [
+        "stressful",
+        "family-focused",
+        "moving"
+      ],
+      "avoidIf": [
+        "lighthearted",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 378064,
+      "title": "A Silent Voice",
+      "year": 2016,
+      "primaryMoods": [
+        "emotional",
+        "melancholic",
+        "compassionate"
+      ],
+      "secondaryMoods": [
+        "hopeful",
+        "intimate",
+        "youth-focused"
+      ],
+      "avoidIf": [
+        "lighthearted",
+        "fast-paced-action"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 12477,
+      "title": "Grave of the Fireflies",
+      "year": 1988,
+      "primaryMoods": [
+        "devastating",
+        "tragic",
+        "bleak"
+      ],
+      "secondaryMoods": [
+        "intimate",
+        "war-focused",
+        "melancholic"
+      ],
+      "avoidIf": [
+        "comforting",
+        "uplifting",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 372058,
+      "title": "Your Name",
+      "year": 2016,
+      "primaryMoods": [
+        "romantic",
+        "wistful",
+        "awe-inspiring"
+      ],
+      "secondaryMoods": [
+        "emotional",
+        "mysterious",
+        "hopeful"
+      ],
+      "avoidIf": [
+        "grim",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 670,
+      "title": "Oldboy",
+      "year": 2003,
+      "primaryMoods": [
+        "brutal",
+        "disturbing",
+        "dark"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "revenge-driven",
+        "psychological"
+      ],
+      "avoidIf": [
+        "comforting",
+        "lighthearted",
+        "squeamish"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 11423,
+      "title": "Memories of Murder",
+      "year": 2003,
+      "primaryMoods": [
+        "bleak",
+        "mysterious",
+        "uneasy"
+      ],
+      "secondaryMoods": [
+        "darkly-funny",
+        "procedural",
+        "frustrating"
+      ],
+      "avoidIf": [
+        "clear-resolution",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 290098,
+      "title": "The Handmaiden",
+      "year": 2016,
+      "primaryMoods": [
+        "sensual",
+        "twisty",
+        "dark"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "tense",
+        "stylish"
+      ],
+      "avoidIf": [
+        "family-friendly",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 396535,
+      "title": "Train to Busan",
+      "year": 2016,
+      "primaryMoods": [
+        "tense",
+        "adrenaline-filled",
+        "emotional"
+      ],
+      "secondaryMoods": [
+        "scary",
+        "tragic",
+        "suspenseful"
+      ],
+      "avoidIf": [
+        "relaxing",
+        "low-violence",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 1091,
+      "title": "The Thing",
+      "year": 1982,
+      "primaryMoods": [
+        "paranoid",
+        "claustrophobic",
+        "disturbing"
+      ],
+      "secondaryMoods": [
+        "mysterious",
+        "tense",
+        "body-horror"
+      ],
+      "avoidIf": [
+        "comforting",
+        "lighthearted",
+        "squeamish"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 348,
+      "title": "Alien",
+      "year": 1979,
+      "primaryMoods": [
+        "claustrophobic",
+        "dread-filled",
+        "tense"
+      ],
+      "secondaryMoods": [
+        "scary",
+        "isolating",
+        "sci-fi"
+      ],
+      "avoidIf": [
+        "comforting",
+        "lighthearted"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 264660,
+      "title": "Ex Machina",
+      "year": 2015,
+      "primaryMoods": [
+        "cerebral",
+        "unsettling",
+        "tense"
+      ],
+      "secondaryMoods": [
+        "minimalist",
+        "mysterious",
+        "thought-provoking"
+      ],
+      "avoidIf": [
+        "fast-paced-action",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 11324,
+      "title": "Shutter Island",
+      "year": 2010,
+      "primaryMoods": [
+        "mysterious",
+        "paranoid",
+        "dark"
+      ],
+      "secondaryMoods": [
+        "psychological",
+        "tense",
+        "mind-bending"
+      ],
+      "avoidIf": [
+        "lighthearted",
+        "comforting"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 550,
+      "title": "Fight Club",
+      "year": 1999,
+      "primaryMoods": [
+        "rebellious",
+        "dark",
+        "mind-bending"
+      ],
+      "secondaryMoods": [
+        "violent",
+        "satirical",
+        "psychological"
+      ],
+      "avoidIf": [
+        "comforting",
+        "family-friendly"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 37799,
+      "title": "The Social Network",
+      "year": 2010,
+      "primaryMoods": [
+        "sharp",
+        "cynical",
+        "driven"
+      ],
+      "secondaryMoods": [
+        "talky",
+        "tense",
+        "thought-provoking"
+      ],
+      "avoidIf": [
+        "feel-good",
+        "action-packed"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 389,
+      "title": "12 Angry Men",
+      "year": 1957,
+      "primaryMoods": [
+        "intense",
+        "thought-provoking",
+        "claustrophobic"
+      ],
+      "secondaryMoods": [
+        "moral",
+        "dialogue-driven",
+        "suspenseful"
+      ],
+      "avoidIf": [
+        "action-heavy",
+        "visual-spectacle"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 76,
+      "title": "Before Sunrise",
+      "year": 1995,
+      "primaryMoods": [
+        "romantic",
+        "intimate",
+        "dreamy"
+      ],
+      "secondaryMoods": [
+        "contemplative",
+        "hopeful",
+        "wistful"
+      ],
+      "avoidIf": [
+        "action-packed",
+        "plot-heavy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 80,
+      "title": "Before Sunset",
+      "year": 2004,
+      "primaryMoods": [
+        "wistful",
+        "romantic",
+        "bittersweet"
+      ],
+      "secondaryMoods": [
+        "intimate",
+        "contemplative",
+        "melancholic"
+      ],
+      "avoidIf": [
+        "action-packed",
+        "simple-feel-good"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 394117,
+      "title": "The Florida Project",
+      "year": 2017,
+      "primaryMoods": [
+        "naturalistic",
+        "bittersweet",
+        "melancholic"
+      ],
+      "secondaryMoods": [
+        "playful",
+        "social-commentary",
+        "uneasy"
+      ],
+      "avoidIf": [
+        "neat-resolution",
+        "escapist-fantasy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 674324,
+      "title": "The Banshees of Inisherin",
+      "year": 2022,
+      "primaryMoods": [
+        "bleakly-funny",
+        "melancholic",
+        "absurd"
+      ],
+      "secondaryMoods": [
+        "dark",
+        "tragic",
+        "contemplative"
+      ],
+      "avoidIf": [
+        "lighthearted",
+        "comforting"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 593643,
+      "title": "The Menu",
+      "year": 2022,
+      "primaryMoods": [
+        "darkly-funny",
+        "tense",
+        "satirical"
+      ],
+      "secondaryMoods": [
+        "unsettling",
+        "stylish",
+        "violent"
+      ],
+      "avoidIf": [
+        "family-friendly",
+        "comforting",
+        "pure-comedy"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 762504,
+      "title": "Nope",
+      "year": 2022,
+      "primaryMoods": [
+        "eerie",
+        "mysterious",
+        "tense"
+      ],
+      "secondaryMoods": [
+        "spectacular",
+        "satirical",
+        "scary"
+      ],
+      "avoidIf": [
+        "simple-comedy",
+        "comforting"
+      ],
+      "note": ""
+    },
+    {
+      "tmdbId": 503919,
+      "title": "The Lighthouse",
+      "year": 2019,
+      "primaryMoods": [
+        "claustrophobic",
+        "surreal",
+        "unsettling"
+      ],
+      "secondaryMoods": [
+        "darkly-funny",
+        "psychological",
+        "mythic"
+      ],
+      "avoidIf": [
+        "easy-watch",
+        "clear-cut-story",
+        "comforting"
+      ],
+      "note": ""
+    }
+  ]
+}

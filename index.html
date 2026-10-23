@@ -73,7 +73,7 @@ button,input{font:inherit}button{cursor:pointer;border:0;font-weight:750;transit
   </div>
   <div id="discoveryPanel" hidden>
     <div class="discovery-fields">
-      <label>Mood<select class="input" id="discoveryMood"><option value="any">Any mood</option><option value="mind">Mind-bending</option><option value="dark">Dark / intense</option><option value="feel">Feel-good</option><option value="emotional">Emotional</option><option value="funny">Funny</option><option value="relax">Relaxing</option></select></label>
+      <label>Mood<select class="input" id="discoveryMood"><option value="any">Any mood</option><option value="mind">Mind-bending</option><option value="dark">Dark / intense</option><option value="feel">Feel-good</option><option value="emotional">Emotional</option><option value="funny">Funny</option><option value="relax">Relaxing</option><option value="romantic">Romantic</option><option value="mysterious">Mysterious</option><option value="hopeful">Hopeful / uplifting</option><option value="disturbing">Disturbing</option><option value="thought-provoking">Thought-provoking</option></select></label>
       <label>Genre<select class="input" id="discoveryGenre"><option value="any">Any genre</option><option>Action</option><option>Adventure</option><option>Animation</option><option>Comedy</option><option>Crime</option><option>Drama</option><option>Fantasy</option><option>Horror</option><option>Mystery</option><option>Romance</option><option>Sci-Fi</option><option>Thriller</option><option>Documentary</option></select></label>
       <label>Runtime<select class="input" id="discoveryRuntime"><option value="any">Any length</option><option value="short">Under 90 min</option><option value="medium">90–120 min</option><option value="long">Over 120 min</option></select></label>
       <label>Minimum TMDB rating<select class="input" id="discoveryRating"><option value="0">Any rating</option><option value="6">6+</option><option value="7">7+</option><option value="8">8+</option></select></label>
@@ -224,6 +224,26 @@ $('refreshGallery').onclick=renderGallery;$('exportStats').onclick=()=>{const da
 $('exportBackup').onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cinepick-full-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
 $('export').onclick=()=>{const blob=new Blob([state.movies.map(m=>(state.watched.some(x=>norm(x)===norm(m))?'[v] ':'[ ] ')+m).join('\n')],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cinepick-movie-list.txt';a.click();URL.revokeObjectURL(a.href);};
 
+// Curated mood database is separate from the app code. If it cannot load, legacy matching remains available.
+let cinePickMoodDB = null;
+fetch('./movie-moods.json', {cache:'no-cache'}).then(r => { if(!r.ok) throw new Error('Mood database unavailable'); return r.json(); }).then(db => { if(db && Array.isArray(db.movies)) cinePickMoodDB = db; }).catch(() => {});
+const DISCOVERY_MOOD_TAGS = {
+ mind:['mind-bending','intricate','cerebral','psychological'], dark:['dark','bleak','disturbing','tense','brutal','dread-filled'],
+ feel:['warm','hopeful','uplifting','heartwarming','joyful','inspiring','gentle'], emotional:['emotional','moving','melancholic','bittersweet','tragic','compassionate'],
+ funny:['funny','witty','darkly-funny','raunchy-funny','raucous-funny','playful'], relax:['gentle','warm','dreamy','comforting','heartwarming'],
+ romantic:['romantic','tender','wistful','dreamy','bittersweet'], mysterious:['mysterious','suspenseful','unpredictable','twisty','paranoid'],
+ hopeful:['hopeful','uplifting','inspiring','heartwarming','joyful'], disturbing:['disturbing','unsettling','brutal','dread-filled','bleak'], 'thought-provoking':['thought-provoking','cerebral','contemplative','satirical','social-commentary']
+};
+function getCuratedMood(movieName){
+ if(!cinePickMoodDB) return null; const d=state.details[movieName]||{}; const id=Number(d.tmdbId||d.tmdbID||d.id||0);
+ return cinePickMoodDB.movies.find(x => id && Number(x.tmdbId)===id) || cinePickMoodDB.movies.find(x => norm(x.title)===norm(movieName)) || null;
+}
+function curatedMoodScore(movieName, mood){
+ const entry=getCuratedMood(movieName); if(!entry || mood==='any') return null;
+ const wanted=DISCOVERY_MOOD_TAGS[mood]||[mood]; const primary=(entry.primaryMoods||[]).map(x=>String(x).toLowerCase()); const secondary=(entry.secondaryMoods||[]).map(x=>String(x).toLowerCase()); const avoid=(entry.avoidIf||[]).map(x=>String(x).toLowerCase());
+ if(avoid.some(tag=>wanted.some(w=>tag===w || tag.includes(w) || w.includes(tag)))) return -100;
+ const p=primary.filter(tag=>wanted.some(w=>tag===w || tag.includes(w) || w.includes(tag))).length; const s=secondary.filter(tag=>wanted.some(w=>tag===w || tag.includes(w) || w.includes(tag))).length; return p*3+s;
+}
 // Optional Smart Discovery: closed by default; only searches the user's saved collection.
 function runSmartDiscovery(){
  const box=$('discoveryResults'); if(!box)return; box.innerHTML='';
@@ -241,15 +261,19 @@ function runSmartDiscovery(){
    if(runtime==='medium'&&(!mins||mins<90||mins>120))return false;
    if(runtime==='long'&&(!mins||mins<=120))return false;
    if(mood!=='any'){
-     const tags=(String(d.mood||'')+' '+String(d.genres||d.genre||'')+' '+String(d.synopsis||'')).toLowerCase();
-     const terms={mind:['mind','psychological','mystery','thriller','twist'],dark:['dark','crime','horror','thriller','intense'],feel:['comedy','family','feel-good','feel good','adventure'],emotional:['drama','emotional','romance','family'],funny:['comedy','funny'],relax:['relax','comedy','romance','feel-good']};
-     if(!terms[mood].some(t=>tags.includes(t)))return false;
+     const curated=curatedMoodScore(m,mood);
+     if(curated!==null){ if(curated<0 || curated===0)return false; }
+     else {
+       const tags=(String(d.mood||'')+' '+String(d.genres||d.genre||'')+' '+String(d.synopsis||'')).toLowerCase();
+       const terms={mind:['mind','psychological','mystery','thriller','twist'],dark:['dark','crime','horror','thriller','intense'],feel:['comedy','family','feel-good','feel good','adventure'],emotional:['drama','emotional','romance','family'],funny:['comedy','funny'],relax:['relax','comedy','romance','feel-good'],romantic:['romance','romantic','love'],mysterious:['mystery','mysterious','thriller'],hopeful:['hope','uplifting','inspiring','family'],disturbing:['disturbing','horror','violent','bleak'],'thought-provoking':['thought-provoking','psychological','social commentary']};
+       if(!(terms[mood]||[mood]).some(t=>tags.includes(t)))return false;
+     }
    }
    return true;
  });
  if(!candidates.length){box.innerHTML='<div class="empty">No confident matches with those filters yet. Try widening your choices or fetch more TMDB details.</div>';return;}
  // Prefer stronger saved ratings when available, then randomize among the best candidates.
- const shuffled=candidates.map(m=>({m,score:Number((state.details[m]||{}).tmdbRating||0)+Math.random()*1.5})).sort((a,b)=>b.score-a.score).slice(0,6);
+ const shuffled=candidates.map(m=>({m,score:(mood==='any'?0:(curatedMoodScore(m,mood)||0)*2)+Number((state.details[m]||{}).tmdbRating||0)+Math.random()*1.5})).sort((a,b)=>b.score-a.score).slice(0,6);
  shuffled.forEach(({m})=>{
    const d=state.details[m]||{}, card=document.createElement('article');card.className='discovery-result';
    const title=document.createElement('b');title.textContent=m;card.appendChild(title);
