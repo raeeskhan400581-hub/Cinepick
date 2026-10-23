@@ -10,7 +10,16 @@ button,input{font:inherit}button{cursor:pointer;border:0;font-weight:750;transit
 .wrap{width:min(1120px,calc(100% - 28px));margin:auto;padding:24px 0 42px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--pink));font-size:24px}.brand h1{font-size:23px;margin:0;letter-spacing:-.7px}.brand p{margin:3px 0 0;color:var(--muted);font-size:11px}.pill{border:1px solid var(--line);border-radius:999px;padding:9px 13px;color:#d6c7ff;font-size:11px;background:#171522}
 .hero{text-align:center;padding:16px 0 25px}.eyebrow{font-size:11px;letter-spacing:2.5px;color:#c6a8ff;font-weight:850}.hero h2{font-size:clamp(32px,5vw,54px);line-height:1.04;letter-spacing:-1.8px;margin:12px 0}.hero h2 span{background:linear-gradient(90deg,#b79aff,#ff83bd);color:transparent;background-clip:text}.hero p{color:var(--muted);margin:0 auto;max-width:550px;line-height:1.6}
 .grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:18px;align-items:start}.card{background:linear-gradient(160deg,#171724ee,#101018f5);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 15px 45px #0002}.card h3{font-size:16px;margin:0 0 7px}.sub{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 16px}
-.wheelbox{display:grid;place-items:center;padding:6px 0 12px}.wheelwrap{width:min(100%,370px);aspect-ratio:1;position:relative}.wheel{width:100%;height:100%;border-radius:50%;border:7px solid #29263c;box-shadow:0 0 0 2px #9b6cff30,0 20px 50px #0007;overflow:hidden;background:#222;transition:transform 4.4s cubic-bezier(.12,.75,.12,1)}canvas{width:100%;height:100%;display:block}.pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);z-index:3;width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:29px solid #fff;filter:drop-shadow(0 3px 5px #0008)}.spinbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:94px;height:94px;border-radius:50%;background:linear-gradient(145deg,#b99aff,#7d4cff);color:white;border:7px solid #171522;box-shadow:0 8px 25px #0008;font-size:13px;letter-spacing:.7px}.spinbtn:disabled{opacity:.5;cursor:wait}.wheelhint{color:var(--muted);font-size:12px;text-align:center;margin:3px 0 0}.result{display:none;margin-top:17px;border:1px solid #7655ad;background:linear-gradient(120deg,#261b3e,#211727);border-radius:16px;padding:18px;text-align:center}.result.show{display:block}.result small{color:#c6a8ff;letter-spacing:1.5px;font-weight:800}.result h3{font-size:clamp(20px,3vw,30px);margin:9px 0 14px;overflow-wrap:anywhere}.actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.btn{padding:11px 13px;border-radius:11px;color:#fff;background:#1b1b2a;border:1px solid #343149;font-size:12px}.btn.primary{background:linear-gradient(90deg,#8c5cff,#bd5dff);border:0}.btn.danger{color:#ffb5c7;border-color:#613344}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}.stat{background:#0d0d15;border:1px solid var(--line);border-radius:13px;padding:12px}.stat strong{display:block;font-size:21px}.stat span{color:var(--muted);font-size:10px}
+ .wheelbox{display:grid;place-items:center;padding:12px 0 18px}.wheelwrap{width:min(100%,370px);aspect-ratio:1;position:relative;isolation:isolate;filter:drop-shadow(0 12px 28px #0008)}
+.wheelwrap:before,.wheelwrap:after{content:"";position:absolute;inset:-7%;border-radius:50%;pointer-events:none;opacity:.8;z-index:-1;transition:filter .4s,opacity .4s}
+.wheelwrap:before{background:conic-gradient(from 0deg,transparent 0 8%,#7b45ff70 12%,transparent 18% 31%,#32baff66 36%,transparent 43% 57%,#f45aff55 64%,transparent 70% 84%,#744bff70 91%,transparent 97%);filter:blur(12px);animation:cosmicOrbit 18s linear infinite}
+.wheelwrap:after{inset:-3%;border:2px solid #8e69ff55;box-shadow:0 0 22px #7e4dff55,inset 0 0 22px #3bbaff22;background:radial-gradient(ellipse at center,transparent 56%,#4820a622 70%,transparent 75%);animation:portalPulse 3.8s ease-in-out infinite}
+.wheel{width:100%;height:100%;border-radius:50%;border:5px solid #4c3a75;box-shadow:0 0 0 2px #9b6cff55,0 0 24px #7a4aff55,0 20px 50px #0009;overflow:hidden;background:#080711;transition:transform 5.4s cubic-bezier(.08,.78,.12,1);position:relative}
+.wheel:after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;box-shadow:inset 0 0 22px #08030f,inset 0 0 4px #fff8;background:radial-gradient(circle at center,transparent 35%,#05030b12 55%,#08071166 100%)}canvas{width:100%;height:100%;display:block}.pointer{position:absolute;top:-9px;left:50%;transform:translateX(-50%);z-index:5;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:27px solid #f7efff;filter:drop-shadow(0 0 7px #b17aff) drop-shadow(0 2px 5px #0008)}
+.spinbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:94px;height:94px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#33235d,#0b0918 70%);color:#f5edff;border:2px solid #a989ff;box-shadow:0 0 0 6px #150c2d,0 0 22px #914dff99,inset 0 0 16px #7c4aff55;font-size:12px;letter-spacing:1px;text-shadow:0 0 10px #c9a5ff}
+.wheelwrap.vortex-spinning:before{opacity:1;filter:blur(9px) brightness(1.5);animation-duration:1.15s}.wheelwrap.vortex-chaos:before{animation-duration:.62s;filter:blur(7px) brightness(1.9)}.wheelwrap.vortex-spinning:after{border-color:#b8a0ff;box-shadow:0 0 32px #a34dff,inset 0 0 30px #3d9bff55;animation-duration:.7s}.wheelwrap.vortex-chaos:after{transform:scale(1.04) rotate(22deg);border-color:#ef8aff;box-shadow:0 0 42px #a34dff,inset 0 0 42px #3d9bff88}.wheelwrap.vortex-spinning .wheel{box-shadow:0 0 0 3px #b18affaa,0 0 36px #6d40ffbb,0 0 70px #302cff66,0 20px 50px #0009}.wheelwrap.vortex-collapse:before{animation-duration:.45s;filter:blur(7px) brightness(2)}.wheelwrap.vortex-collapse .vortex-orbit{animation-duration:1.1s;transform:scale(.72) rotate(35deg);opacity:.95}.wheelwrap.vortex-collapse:after{transform:scale(.93);box-shadow:0 0 48px #f3d8ff,inset 0 0 40px #ad7dff;}
+@keyframes cosmicOrbit{to{transform:rotate(360deg)}}@keyframes portalPulse{0%,100%{transform:scale(.99);opacity:.55}50%{transform:scale(1.025);opacity:1}}
+@media(prefers-reduced-motion:reduce){.wheelwrap:before,.wheelwrap:after{animation:none!important}.wheel{transition-duration:1.2s!important}}.spinbtn:disabled{opacity:.5;cursor:wait}.wheelhint{color:var(--muted);font-size:12px;text-align:center;margin:3px 0 0}.result{display:none;margin-top:17px;border:1px solid #7655ad;background:linear-gradient(120deg,#261b3e,#211727);border-radius:16px;padding:18px;text-align:center}.result.show{display:block}.result small{color:#c6a8ff;letter-spacing:1.5px;font-weight:800}.result h3{font-size:clamp(20px,3vw,30px);margin:9px 0 14px;overflow-wrap:anywhere}.actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.btn{padding:11px 13px;border-radius:11px;color:#fff;background:#1b1b2a;border:1px solid #343149;font-size:12px}.btn.primary{background:linear-gradient(90deg,#8c5cff,#bd5dff);border:0}.btn.danger{color:#ffb5c7;border-color:#613344}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}.stat{background:#0d0d15;border:1px solid var(--line);border-radius:13px;padding:12px}.stat strong{display:block;font-size:21px}.stat span{color:var(--muted);font-size:10px}
 .field{display:flex;gap:8px}.field input{min-width:0;flex:1}.input{width:100%;border:1px solid #35334a;background:#0b0b13;color:var(--text);border-radius:10px;padding:11px 12px;outline:none}.input:focus{border-color:var(--purple)}.upload{display:flex;align-items:center;justify-content:center;gap:8px;border:1px dashed #615080;background:#21182e;border-radius:12px;padding:13px;color:#e4d6ff;width:100%;font-size:12px;margin:12px 0}.upload input{display:none}.note{font-size:11px;color:var(--muted);line-height:1.55;margin-top:10px}.listhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 10px}.listhead h4{margin:0;font-size:13px}.movielist{max-height:270px;overflow:auto;border:1px solid var(--line);border-radius:12px}.movieitem{display:flex;align-items:center;gap:9px;padding:10px 11px;border-bottom:1px solid #242335;font-size:12px}.movieitem:last-child{border-bottom:0}.movieitem .title{flex:1;overflow-wrap:anywhere}.tag{font-size:9px;color:#d2bfff;border:1px solid #55416e;border-radius:6px;padding:3px 5px}.remove{background:transparent;color:#a9a4bd;padding:3px 6px;font-size:16px}.empty{padding:24px 12px;text-align:center;color:var(--muted);font-size:12px;line-height:1.6}.checkrow{display:flex;align-items:flex-start;gap:9px;color:#d8d5e7;font-size:12px;line-height:1.5;margin:12px 0}.checkrow input{accent-color:var(--purple);margin-top:2px}.history{margin-top:16px}.historylist{display:flex;flex-direction:column;gap:7px;max-height:220px;overflow:auto}.historyitem{display:flex;gap:9px;align-items:center;background:#0d0d15;border:1px solid var(--line);padding:9px 10px;border-radius:10px;font-size:12px}.historyitem span{color:var(--muted);font-size:10px;min-width:22px}.historyitem b{font-weight:600;overflow-wrap:anywhere;flex:1}.historyitem button{background:transparent;color:#a9a4bd}.footer{text-align:center;color:#77738e;font-size:11px;margin-top:22px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 @media(max-width:800px){.grid{grid-template-columns:1fr}.hero{padding-top:10px}.card{padding:16px}.wheelwrap{width:min(86vw,340px)}.pill{display:none}}
 
@@ -63,6 +72,16 @@ button,input{font:inherit}button{cursor:pointer;border:0;font-weight:750;transit
 .discovery-result p{font-size:11px;color:var(--muted);line-height:1.45;margin:0 0 8px}
 @media(max-width:420px){.discovery-fields{grid-template-columns:1fr}.discovery-results{grid-template-columns:1fr}.discovery-top{align-items:flex-start}}
 
+
+/* Spoiler-Free Movie Intelligence */
+.intel-card{margin-top:14px;padding:14px;border:1px solid #4b3a68;border-radius:15px;background:linear-gradient(145deg,#1c172a,#101018)}
+.intel-card h4{margin:0 0 8px;font-size:14px}.intel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0}
+.intel-chip{padding:9px;border:1px solid #343149;background:#0d0d15;border-radius:10px;min-width:0}
+.intel-chip small{display:block;color:#aaa8bf;font-size:9px;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px}
+.intel-chip b{font-size:11px;line-height:1.45;overflow-wrap:anywhere}.intel-copy{font-size:12px;line-height:1.6;color:#e2deef}
+.intel-warning{font-size:10px;color:#d7c8ff;line-height:1.5;margin-top:9px}
+@media(max-width:420px){.intel-grid{grid-template-columns:1fr}}
+
 </style></head>
 <body><div class="wrap">
 <header><div class="brand"><div class="logo">🎬</div><div><h1>CinePick</h1><p>YOUR NEXT MOVIE, LEFT TO CHANCE</p></div></div><div class="pill">✦ PERSONAL MOVIE ROULETTE</div></header>
@@ -85,8 +104,8 @@ button,input{font:inherit}button{cursor:pointer;border:0;font-weight:750;transit
   </div>
 </section>
 <section class="hero"><div class="eyebrow">TONIGHT'S BIG QUESTION</div><h2>Stop scrolling.<br><span>Start watching.</span></h2><p>Your movie collection is loaded. Spin the wheel, then decide whether to keep or remove the pick.</p></section>
-<main class="grid"><section class="card"><h3>🎰 Movie roulette</h3><p class="sub">Every available movie has an equal chance of being selected.</p>
-<div class="wheelbox"><div class="wheelwrap"><div class="pointer"></div><div class="wheel" id="wheel"><canvas id="canvas" width="700" height="700"></canvas></div><button class="spinbtn" id="spin">SPIN<br>THE WHEEL</button></div></div><p class="wheelhint" id="hint">Ready when you are.</p><div class="toolbar" style="justify-content:center"><label class="checkrow" style="margin:5px 0"><input type="checkbox" id="soundOn" checked><span>🔊 Cinematic sound effects</span></label></div>
+<main class="grid"><section class="card"><h3>🌌 Cosmic Vortex</h3><p class="sub">Movies orbit the void, spiral inward, and the universe chooses your next watch.</p>
+<div class="wheelbox"><div class="wheelwrap" id="vortex"><div class="vortex-orbit orbit-one" aria-hidden="true"></div><div class="vortex-orbit orbit-two" aria-hidden="true"></div><div class="vortex-stars" aria-hidden="true"></div><div class="pointer"></div><div class="wheel" id="wheel"><canvas id="canvas" width="700" height="700"></canvas></div><button class="spinbtn" id="spin">ENTER<br>THE VOID</button></div></div><p class="wheelhint" id="hint">Ready when you are.</p><div class="toolbar" style="justify-content:center"><label class="checkrow" style="margin:5px 0"><input type="checkbox" id="soundOn" checked><span>🔊 Cinematic sound effects</span></label></div>
 <div class="result" id="result"><small>TONIGHT'S PICK</small><h3 id="winner">—</h3><div class="actions"><button class="btn primary" id="keep">Keep in list</button><button class="btn danger" id="remove">Remove from list</button><button class="btn" id="again">Spin again</button></div><p class="note" id="resultNote">Choose what to do with this movie.</p></div>
 <div class="stats"><div class="stat"><strong id="total">0</strong><span>IN COLLECTION</span></div><div class="stat"><strong id="available">0</strong><span>AVAILABLE</span></div><div class="stat"><strong id="removedCount">0</strong><span>REMOVED</span></div></div>
 <label class="checkrow"><input type="checkbox" id="excludeWatched" checked><span><b>Exclude already-watched movies</b><br>Checked titles are saved as watched and won't be on the wheel while this is enabled.</span></label>
@@ -177,12 +196,125 @@ async function autoLookup(movie,quiet=false){const status=$('lookupStatus')||$('
 async function bulkLookup(){if(!getTmdbKey()){setupTmdbKey();if(!getTmdbKey())return;}const todo=state.movies.filter(m=>!state.details[m]?.metadataFetchedAt&&!state.removed.some(x=>norm(x)===norm(m)));const status=$('bulkStatus');let done=0,failed=0;for(const m of todo){status.textContent=`Fetching TMDB details: ${done+failed+1}/${todo.length} — ${m}`;try{await lookupTmdb(m);done++;}catch(e){failed++;}render();await new Promise(r=>setTimeout(r,250));}status.textContent=`Finished. Updated ${done}; not found/failed ${failed}. Details are saved locally. You can run this again later.`;}
 
 function playTone(freq=440,duration=.12,type='sine',gain=.045){if(!$('soundOn')?.checked)return;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ctx=new AC(),o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(gain,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+duration);o.onended=()=>ctx.close();}catch(e){}}
-function fanfare(){[523,659,784,1046].forEach((f,i)=>setTimeout(()=>playTone(f,.22,'triangle',.06),i*95));}
-function confetti(){for(let i=0;i<48;i++){const el=document.createElement('i');el.className='confetti';el.style.left=Math.random()*100+'vw';el.style.background=colors[i%colors.length];el.style.animationDelay=(Math.random()*.45)+'s';el.style.setProperty('--drift',(Math.random()*220-110)+'px');document.body.appendChild(el);setTimeout(()=>el.remove(),3200);}}
+function cosmicSweep(){if(!$('soundOn')?.checked)return;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ctx=new AC();ctx.resume?.();const now=ctx.currentTime;const master=ctx.createGain();master.gain.setValueAtTime(.0001,now);master.gain.exponentialRampToValueAtTime(.11,now+.35);master.gain.exponentialRampToValueAtTime(.0001,now+2.4);master.connect(ctx.destination);const osc=ctx.createOscillator(),filter=ctx.createBiquadFilter();osc.type='sawtooth';osc.frequency.setValueAtTime(75,now);osc.frequency.exponentialRampToValueAtTime(420,now+1.35);osc.frequency.exponentialRampToValueAtTime(95,now+2.35);filter.type='lowpass';filter.frequency.setValueAtTime(280,now);filter.frequency.exponentialRampToValueAtTime(1800,now+1.2);filter.frequency.exponentialRampToValueAtTime(240,now+2.4);osc.connect(filter);filter.connect(master);osc.start(now);osc.stop(now+2.45);osc.onended=()=>ctx.close();}catch(e){}}
+function cosmicImpact(){if(!$('soundOn')?.checked)return;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;const ctx=new AC();ctx.resume?.();const now=ctx.currentTime;const g=ctx.createGain();g.gain.setValueAtTime(.16,now);g.gain.exponentialRampToValueAtTime(.0001,now+1.05);g.connect(ctx.destination);const o=ctx.createOscillator();o.type='sine';o.frequency.setValueAtTime(115,now);o.frequency.exponentialRampToValueAtTime(38,now+.85);o.connect(g);o.start(now);o.stop(now+1.08);o.onended=()=>ctx.close();}catch(e){}}
+function fanfare(){cosmicImpact();[392,587,784].forEach((f,i)=>setTimeout(()=>playTone(f,.32,'sine',.025),i*125));}
+function cosmicTick(freq=250){playTone(freq,.055,'sine',.012);}
 let trackerMovie=null;
+
+function findCuratedMood(movieName, d = {}) {
+ const byId = d.tmdbId ? cinePickMoodDB?.movies?.find(x => Number(x.tmdbId) === Number(d.tmdbId)) : null;
+ if (byId) return byId;
+ const n = norm(movieName);
+ return cinePickMoodDB?.movies?.find(x => norm(x.title) === n) || null;
+}
+function buildSpoilerFreeProfile(movieName, d = {}) {
+ const curated = findCuratedMood(movieName, d);
+ const tags = [...(curated?.primaryMoods || []), ...(curated?.secondaryMoods || [])];
+ const hay = (tags.join(' ') + ' ' + (d.genre || d.genres || '') + ' ' + (d.synopsis || '') + ' ' + (d.mood || '')).toLowerCase();
+ const has = (...words) => words.some(w => hay.includes(w));
+ const vibe = tags.length ? tags.slice(0, 4).map(t => t.replaceAll('-', ' ')).join(', ') :
+   (d.mood || d.genre || 'Not enough metadata yet');
+ let complexity = has('mind-bending','intricate','cerebral','psychological','mysterious','surreal','twisty')
+   ? 'Layered or puzzle-like' : has('dialogue-driven','contemplative','thought-provoking') ? 'Reflective and idea-led'
+   : d.synopsis ? 'Story details available; complexity not confirmed' : 'Not enough information';
+ let pacing = has('adrenaline','action-packed','fast-paced','chaotic','intense')
+   ? 'Energetic or intense' : has('slow-burn','contemplative','dreamy','intimate','minimalist')
+   ? 'Measured or atmospheric' : 'Not reliably known';
+ let emotion = has('devastating','tragic','emotional','moving','melancholic','bittersweet','grief-focused')
+   ? 'High or emotionally layered' : has('warm','hopeful','joyful','funny','playful')
+   ? 'Warm, lighter, or mixed' : 'Not enough information';
+ let darkness = has('disturbing','brutal','bleak','dread-filled','dark','violent','body-horror')
+   ? 'Dark / potentially disturbing' : has('heartwarming','joyful','family-friendly','gentle','uplifting')
+   ? 'Generally lighter in tone' : 'Not reliably known';
+ const warnings = [];
+ if (has('violent','brutal','violent','body-horror')) warnings.push('violence or intense imagery');
+ if (has('disturbing','unsettling','dread-filled','bleak')) warnings.push('disturbing or unsettling themes');
+ if (has('tragic','grief-focused','devastating')) warnings.push('grief or loss');
+ if (has('raunchy-funny','adult-humour','sensual')) warnings.push('adult humour or sexual content');
+ const avoid = curated?.avoidIf || [];
+ const bestFor = tags.length ? 'Viewers in the mood for ' + tags.slice(0, 2).map(t => t.replaceAll('-', ' ')).join(' and ') :
+   (d.genre ? 'Viewers interested in ' + d.genre : 'Fetch movie details for a stronger profile');
+ const why = curated?.note || (d.synopsis
+   ? 'The available synopsis and metadata can help set expectations, but this profile has limited curated mood data.'
+   : 'Add or fetch TMDB details to improve this spoiler-free profile.');
+ return {vibe, complexity, pacing, emotion, darkness, bestFor, why, warnings, avoid};
+}
+function makeMovieIntelligencePrompt(movieName, d, intel) {
+ return [
+  'Create a spoiler-free movie-intelligence profile. Do not reveal plot twists, the ending, or major reveals.',
+  'Clearly distinguish known facts from interpretation; do not invent missing facts. Keep content warnings broad and non-graphic.',
+  'Movie: ' + movieName,
+  'Year: ' + (d.year || 'unknown'),
+  'Genres: ' + (d.genre || d.genres || 'unknown'),
+  'Runtime: ' + (d.runtime ? d.runtime + ' minutes' : 'unknown'),
+  'Synopsis: ' + (d.synopsis || 'not available'),
+  'CinePick curated mood tags: ' + (intel.vibe || 'none'),
+  'CinePick note: ' + (intel.why || 'none'),
+  'Please provide: overall vibe, story complexity, pacing, emotional intensity, darkness level, who may enjoy it, spoiler-free reasons to watch, and broad content considerations.'
+ ].join('\n');
+}
+
 function openTracker(m){trackerMovie=m;const d=state.details[m]||{};const editor=$('trackerEditor');editor.className='';editor.innerHTML='';const title=document.createElement('p');title.innerHTML='<b></b>';title.querySelector('b').textContent=m;editor.appendChild(title);
  const lookupBar=document.createElement('div');lookupBar.className='toolbar';const lookupBtn=document.createElement('button');lookupBtn.className='btn primary';lookupBtn.textContent='✨ Auto-find movie info + poster';lookupBtn.onclick=()=>autoLookup(m);lookupBar.appendChild(lookupBtn);const lookupMsg=document.createElement('div');lookupMsg.id='lookupStatus';lookupMsg.className='lookup-status';lookupBar.appendChild(lookupMsg);editor.appendChild(lookupBar);
  const existingSynopsis=document.createElement('div');existingSynopsis.className='synopsis';if(d.poster){const im=document.createElement('img');im.className='poster-large';im.src=d.poster;im.alt='Movie poster';existingSynopsis.appendChild(im);}if(d.synopsis){const sp=document.createElement('p');sp.textContent=d.synopsis;existingSynopsis.appendChild(sp);}if(d.director){const dr=document.createElement('p');dr.textContent='Director: '+d.director;existingSynopsis.appendChild(dr);}if(d.cast){const ca=document.createElement('p');ca.textContent='Cast: '+d.cast;existingSynopsis.appendChild(ca);}if(d.year||d.tmdbRating){const ra=document.createElement('p');ra.textContent=[d.year,d.tmdbRating?'TMDB ★ '+d.tmdbRating.toFixed(1)+'/10':''].filter(Boolean).join(' · ');existingSynopsis.appendChild(ra);}if(d.imdbUrl){const a=document.createElement('a');a.href=d.imdbUrl;a.target='_blank';a.rel='noopener';a.textContent='Open on IMDb ↗';a.style.color='#d5c6ff';existingSynopsis.appendChild(a);}if(existingSynopsis.childNodes.length)editor.appendChild(existingSynopsis);
+
+ // Spoiler-Free Movie Intelligence: automatic profile from TMDB details + curated mood data.
+ const intel = buildSpoilerFreeProfile(m, d);
+ const intelBox = document.createElement('section');
+ intelBox.className = 'intel-card';
+ const intelTitle = document.createElement('h4');
+ intelTitle.textContent = '🎬 Spoiler-Free Movie Intelligence';
+ intelBox.appendChild(intelTitle);
+ const intelIntro = document.createElement('p');
+ intelIntro.className = 'intel-copy';
+ intelIntro.textContent = 'A quick guide to the viewing experience, generated from available movie metadata and CinePick’s curated mood tags. It avoids plot twists and ending details.';
+ intelBox.appendChild(intelIntro);
+ const intelGrid = document.createElement('div');
+ intelGrid.className = 'intel-grid';
+ [
+   ['Overall vibe', intel.vibe],
+   ['Story feel', intel.complexity],
+   ['Pacing', intel.pacing],
+   ['Emotional intensity', intel.emotion],
+   ['Darkness', intel.darkness],
+   ['Best for', intel.bestFor]
+ ].forEach(([label, value]) => {
+   const chip = document.createElement('div'); chip.className = 'intel-chip';
+   const small = document.createElement('small'); small.textContent = label;
+   const strong = document.createElement('b'); strong.textContent = value;
+   chip.append(small, strong); intelGrid.appendChild(chip);
+ });
+ intelBox.appendChild(intelGrid);
+ const why = document.createElement('p'); why.className = 'intel-copy';
+ why.textContent = '✨ Why it may appeal: ' + intel.why;
+ intelBox.appendChild(why);
+ if (intel.warnings.length) {
+   const warnings = document.createElement('p'); warnings.className = 'intel-warning';
+   warnings.textContent = '⚠️ Content considerations: ' + intel.warnings.join(', ') + '. These are broad indicators, not an exhaustive content guide.';
+   intelBox.appendChild(warnings);
+ }
+ const aiRow = document.createElement('div'); aiRow.className = 'toolbar';
+ const aiBtn = document.createElement('button'); aiBtn.className = 'btn primary';
+ aiBtn.textContent = '✨ Prepare optional AI deep analysis';
+ aiBtn.onclick = async () => {
+   const prompt = makeMovieIntelligencePrompt(m, d, intel);
+   try {
+     await navigator.clipboard.writeText(prompt);
+     aiStatus.textContent = 'Analysis prompt copied. Paste it into your preferred AI assistant. No API key is stored in CinePick.';
+   } catch (_) {
+     const area = document.createElement('textarea'); area.className = 'input'; area.rows = 5; area.value = prompt;
+     aiBox.replaceChildren(area);
+     aiStatus.textContent = 'Clipboard unavailable—copy the prompt shown above manually.';
+   }
+ };
+ aiRow.appendChild(aiBtn); intelBox.appendChild(aiRow);
+ const aiStatus = document.createElement('p'); aiStatus.className = 'intel-warning';
+ aiStatus.textContent = 'Optional AI deep analysis uses a copied prompt; direct AI calls require a secure server endpoint so an API secret is never exposed in this browser app.';
+ intelBox.appendChild(aiStatus);
+ const aiBox = document.createElement('div'); intelBox.appendChild(aiBox);
+ editor.appendChild(intelBox);
+
  const form=document.createElement('div');form.className='metaform';
  const field=(label,id,type='text',value='',opts=null,wide=false)=>{const l=document.createElement('label');l.textContent=label;if(wide)l.classList.add('wide');let el;if(opts){el=document.createElement('select');el.className='input';const first=document.createElement('option');first.value='';first.textContent='Select…';el.appendChild(first);opts.forEach(o=>{const op=document.createElement('option');op.value=o;op.textContent=o;el.appendChild(op);});}else{el=document.createElement(type==='textarea'?'textarea':'input');el.className='input';if(type!=='textarea')el.type=type;}el.id='tr_'+id;el.value=value||'';l.appendChild(el);form.appendChild(l);return el;};
  field('Genre','genre','text',d.genre||'', ['Action','Adventure','Animation','Comedy','Crime','Drama','Fantasy','Horror','Mystery','Romance','Sci-Fi','Thriller','Documentary','Other']);field('Runtime (minutes)','runtime','number',d.runtime||'');field('Language','language','text',d.language||'', ['English','Hindi','Gujarati','Malayalam','Tamil','Telugu','Japanese','Korean','Other']);field('Mood','mood','text',d.mood||'', ['Feel-good','Mind-bending','Emotional','Dark','Funny','Inspirational','Relaxing','Intense']);field('Watched date','watchedDate','date',d.watchedDate||'');field('Personal rating (1–5)','rating','number',d.rating||'');const notes=field('Notes / review','notes','textarea',d.notes||'',null,true);notes.rows=3;
@@ -195,15 +327,19 @@ function addMovies(names){
 }
 function spin(){
  const items=activeMovies();if(spinning||!items.length)return;
- current=items[Math.floor(Math.random()*items.length)];spinning=true;$('spin').disabled=true;$('result').classList.remove('show');$('hint').textContent='The wheel is spinning…';playTone(180,.16,'sawtooth',.035);let tickCount=0;const tickTimer=setInterval(()=>{if(!spinning){clearInterval(tickTimer);return;}playTone(240+(tickCount%5)*35,.045,'square',.012);tickCount++;},180);
+ current=items[Math.floor(Math.random()*items.length)];spinning=true;$('spin').disabled=true;$('result').classList.remove('show');$('hint').textContent='The vortex is opening…';
+ const vortex=$('vortex');vortex.classList.remove('vortex-collapse','vortex-chaos');vortex.classList.add('vortex-spinning');cosmicSweep();
+ $('hint').textContent='The movies are entering orbit…';
+ const chaosTimer=setTimeout(()=>{if(spinning){vortex.classList.add('vortex-chaos');$('hint').textContent='The vortex is pulling the universe inward…';}},1350);
+ // Tick sounds become progressively more spaced, mirroring the controlled slowdown.
+ const tickGaps=[95,105,115,130,145,165,190,220,255,300,360,430,520,620,720];let tick=0;
+ const tickNext=()=>{if(!spinning||tick>=tickGaps.length)return;cosmicTick(220+(tick%4)*38);const gap=tickGaps[tick++];setTimeout(tickNext,gap);};tickNext();
  const idx=items.findIndex(x=>norm(x)===norm(current));const step=360/items.length;
- // Pointer at top; center of selected slice should land at 12 o'clock.
- const target=(360-(idx*step+step/2))%360;
- const currentMod=((rotation%360)+360)%360;
- const delta=(target-currentMod+360)%360;
- rotation += 360*5+delta;
- $('wheel').style.transform=`rotate(${rotation}deg)`;
- setTimeout(()=>{spinning=false;$('winner').textContent=current;$('result').classList.add('show');$('hint').textContent='Fate has picked. What do you want to do?';fanfare();confetti();state.history.push({title:current,at:new Date().toISOString()});render();$('result').classList.add('show');},4450);
+ // Keep the existing fair random selection and land the chosen slice under the pointer.
+ const target=(360-(idx*step+step/2))%360;const currentMod=((rotation%360)+360)%360;const delta=(target-currentMod+360)%360;
+ rotation += 360*6+delta;$('wheel').style.transform=`rotate(${rotation}deg)`;
+ setTimeout(()=>{vortex.classList.remove('vortex-spinning','vortex-chaos');vortex.classList.add('vortex-collapse');$('hint').textContent='One movie is escaping the void…';},4400);
+ setTimeout(()=>{clearTimeout(chaosTimer);spinning=false;vortex.classList.remove('vortex-collapse','vortex-chaos','vortex-spinning');$('winner').textContent=current;$('result').classList.add('show');$('hint').textContent='The universe has chosen. What do you want to do?';fanfare();state.history.push({title:current,at:new Date().toISOString()});render();$('result').classList.add('show');},5450);
 }
 function settle(remove){
  if(!current)return;
