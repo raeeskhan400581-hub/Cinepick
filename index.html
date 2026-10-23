@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="theme-color" content="#160d2b"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090910"><title>CinePick — Movie Roulette</title>
+<style>
+:root{--bg:#090910;--panel:#141420;--text:#f7f5ff;--muted:#aaa8bf;--purple:#9b6cff;--pink:#ff5eaa;--line:#2b2a3d}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,#302052 0,transparent 55%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:0;font-weight:750;transition:filter .15s,transform .15s}button:hover{filter:brightness(1.1)}button:active{transform:scale(.98)}
+.wrap{width:min(1120px,calc(100% - 28px));margin:auto;padding:24px 0 42px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),var(--pink));font-size:24px}.brand h1{font-size:23px;margin:0;letter-spacing:-.7px}.brand p{margin:3px 0 0;color:var(--muted);font-size:11px}.pill{border:1px solid var(--line);border-radius:999px;padding:9px 13px;color:#d6c7ff;font-size:11px;background:#171522}
+.hero{text-align:center;padding:16px 0 25px}.eyebrow{font-size:11px;letter-spacing:2.5px;color:#c6a8ff;font-weight:850}.hero h2{font-size:clamp(32px,5vw,54px);line-height:1.04;letter-spacing:-1.8px;margin:12px 0}.hero h2 span{background:linear-gradient(90deg,#b79aff,#ff83bd);color:transparent;background-clip:text}.hero p{color:var(--muted);margin:0 auto;max-width:550px;line-height:1.6}
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:18px;align-items:start}.card{background:linear-gradient(160deg,#171724ee,#101018f5);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 15px 45px #0002}.card h3{font-size:16px;margin:0 0 7px}.sub{font-size:12px;color:var(--muted);line-height:1.5;margin:0 0 16px}
+.wheelbox{display:grid;place-items:center;padding:6px 0 12px}.wheelwrap{width:min(100%,370px);aspect-ratio:1;position:relative}.wheel{width:100%;height:100%;border-radius:50%;border:7px solid #29263c;box-shadow:0 0 0 2px #9b6cff30,0 20px 50px #0007;overflow:hidden;background:#222;transition:transform 4.4s cubic-bezier(.12,.75,.12,1)}canvas{width:100%;height:100%;display:block}.pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);z-index:3;width:0;height:0;border-left:15px solid transparent;border-right:15px solid transparent;border-top:29px solid #fff;filter:drop-shadow(0 3px 5px #0008)}.spinbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:94px;height:94px;border-radius:50%;background:linear-gradient(145deg,#b99aff,#7d4cff);color:white;border:7px solid #171522;box-shadow:0 8px 25px #0008;font-size:13px;letter-spacing:.7px}.spinbtn:disabled{opacity:.5;cursor:wait}.wheelhint{color:var(--muted);font-size:12px;text-align:center;margin:3px 0 0}.result{display:none;margin-top:17px;border:1px solid #7655ad;background:linear-gradient(120deg,#261b3e,#211727);border-radius:16px;padding:18px;text-align:center}.result.show{display:block}.result small{color:#c6a8ff;letter-spacing:1.5px;font-weight:800}.result h3{font-size:clamp(20px,3vw,30px);margin:9px 0 14px;overflow-wrap:anywhere}.actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.btn{padding:11px 13px;border-radius:11px;color:#fff;background:#1b1b2a;border:1px solid #343149;font-size:12px}.btn.primary{background:linear-gradient(90deg,#8c5cff,#bd5dff);border:0}.btn.danger{color:#ffb5c7;border-color:#613344}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}.stat{background:#0d0d15;border:1px solid var(--line);border-radius:13px;padding:12px}.stat strong{display:block;font-size:21px}.stat span{color:var(--muted);font-size:10px}
+.field{display:flex;gap:8px}.field input{min-width:0;flex:1}.input{width:100%;border:1px solid #35334a;background:#0b0b13;color:var(--text);border-radius:10px;padding:11px 12px;outline:none}.input:focus{border-color:var(--purple)}.upload{display:flex;align-items:center;justify-content:center;gap:8px;border:1px dashed #615080;background:#21182e;border-radius:12px;padding:13px;color:#e4d6ff;width:100%;font-size:12px;margin:12px 0}.upload input{display:none}.note{font-size:11px;color:var(--muted);line-height:1.55;margin-top:10px}.listhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 10px}.listhead h4{margin:0;font-size:13px}.movielist{max-height:270px;overflow:auto;border:1px solid var(--line);border-radius:12px}.movieitem{display:flex;align-items:center;gap:9px;padding:10px 11px;border-bottom:1px solid #242335;font-size:12px}.movieitem:last-child{border-bottom:0}.movieitem .title{flex:1;overflow-wrap:anywhere}.tag{font-size:9px;color:#d2bfff;border:1px solid #55416e;border-radius:6px;padding:3px 5px}.remove{background:transparent;color:#a9a4bd;padding:3px 6px;font-size:16px}.empty{padding:24px 12px;text-align:center;color:var(--muted);font-size:12px;line-height:1.6}.checkrow{display:flex;align-items:flex-start;gap:9px;color:#d8d5e7;font-size:12px;line-height:1.5;margin:12px 0}.checkrow input{accent-color:var(--purple);margin-top:2px}.history{margin-top:16px}.historylist{display:flex;flex-direction:column;gap:7px;max-height:220px;overflow:auto}.historyitem{display:flex;gap:9px;align-items:center;background:#0d0d15;border:1px solid var(--line);padding:9px 10px;border-radius:10px;font-size:12px}.historyitem span{color:var(--muted);font-size:10px;min-width:22px}.historyitem b{font-weight:600;overflow-wrap:anywhere;flex:1}.historyitem button{background:transparent;color:#a9a4bd}.footer{text-align:center;color:#77738e;font-size:11px;margin-top:22px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.hero{padding-top:10px}.card{padding:16px}.wheelwrap{width:min(86vw,340px)}.pill{display:none}}
+</style></head>
+<body><div class="wrap">
+<header><div class="brand"><div class="logo">🎬</div><div><h1>CinePick</h1><p>YOUR NEXT MOVIE, LEFT TO CHANCE</p></div></div><div class="pill">✦ PERSONAL MOVIE ROULETTE</div></header>
+<section class="hero"><div class="eyebrow">TONIGHT'S BIG QUESTION</div><h2>Stop scrolling.<br><span>Start watching.</span></h2><p>Your movie collection is loaded. Spin the wheel, then decide whether to keep or remove the pick.</p></section>
+<main class="grid"><section class="card"><h3>🎰 Movie roulette</h3><p class="sub">Every available movie has an equal chance of being selected.</p>
+<div class="wheelbox"><div class="wheelwrap"><div class="pointer"></div><div class="wheel" id="wheel"><canvas id="canvas" width="700" height="700"></canvas></div><button class="spinbtn" id="spin">SPIN<br>THE WHEEL</button></div></div><p class="wheelhint" id="hint">Ready when you are.</p>
+<div class="result" id="result"><small>TONIGHT'S PICK</small><h3 id="winner">—</h3><div class="actions"><button class="btn primary" id="keep">Keep in list</button><button class="btn danger" id="remove">Remove from list</button><button class="btn" id="again">Spin again</button></div><p class="note" id="resultNote">Choose what to do with this movie.</p></div>
+<div class="stats"><div class="stat"><strong id="total">0</strong><span>IN COLLECTION</span></div><div class="stat"><strong id="available">0</strong><span>AVAILABLE</span></div><div class="stat"><strong id="removedCount">0</strong><span>REMOVED</span></div></div>
+<label class="checkrow"><input type="checkbox" id="excludeWatched" checked><span><b>Exclude already-watched movies</b><br>Checked titles are saved as watched and won't be on the wheel while this is enabled.</span></label>
+<div class="toolbar"><button class="btn" id="restore">Restore removed movies</button><button class="btn" id="resetHistory">Clear history</button><button class="btn" id="export">Export collection (.txt)</button></div>
+</section>
+<aside class="card"><h3>📂 Your collection</h3><p class="sub">Your list is saved in this browser. Import more titles or add them manually.</p>
+<label class="upload">⬆️ Upload TXT, CSV, or TSV<input type="file" id="file" accept=".txt,.csv,.tsv"></label><p class="note">TXT: one title per line. CSV/TSV: titles in the first column. Excel files should be saved as CSV first.</p>
+<div class="or">OR ADD A MOVIE</div><div class="field"><input class="input" id="newMovie" placeholder="Enter a movie title"><button class="btn primary" id="add">Add</button></div>
+<div class="listhead"><h4>ALL MOVIES <span id="listCount" style="color:var(--muted)"></span></h4><button class="btn" id="clearRemoved">Clear removed</button></div><input class="input search" id="search" placeholder="Search your collection…">
+<div class="movielist" id="movieList"></div>
+<div class="history"><div class="listhead"><h4>🕘 SPIN HISTORY</h4></div><div class="historylist" id="history"></div></div>
+<p class="note">Privacy: this is a local-only website. Your list stays in this browser; export a backup before clearing browser data.</p>
+</aside></main><div class="footer">Made for your movie nights ✦ CinePick</div></div>
+<script>
+const initial = {"movies": ["Rear Window", "Tokyo Story", "2001: A Space Odyssey", "Bicycle Thieves", "Singin' in the Rain", "City Lights", "Parasite", "City of God", "Cinema Paradiso", "La Dolce Vita", "Metropolis", "Pulp Fiction", "The Lord of the Rings: The Return of the King", "Vertigo", "Psycho", "Apocalypse Now", "The Good, the Bad and the Ugly", "Sunset Boulevard", "Chinatown", "On the Waterfront", "The Third Man", "Spirited Away", "Goodfellas", "It's a Wonderful Life", "Rashomon", "The Seventh Seal", "Fight Club", "Inception", "Forrest Gump", "The Matrix", "One Flew Over the Cuckoo's Nest", "8½", "Mulholland Drive", "North by Northwest", "The Wizard of Oz", "Persona", "The 400 Blows", "In the Mood for Love", "Modern Times", "All About Eve", "Pather Panchali", "Leap Year", "Perfect Days", "The Fable", "The Miracle (Turkish)", "Wild Tales", "Teach You a Lesson", "Swapped", "Triple Frontier", "National Treasure", "Padakkalam", "RDX", "John Q", "Front of the Class", "Demolition", "The Curious Case of Benjamin Button", "About Time", "The Station Agent", "Braveheart", "The Passion of the Christ", "The Peanut Butter Falcon", "The Secret Life of Walter Mitty", "Hey Sinamika", "Bethlehem Kudumba Unit", "Ela Veezha Poonchira", "The Godfather Part II", "Casablanca", "Citizen Kane", "Seven Samurai", "The Godfather", "Orphan (2009)", "Déjà Vu (2006)", "Antwone Fisher (2002)", "The Sixth Sense (1999)", "Fallen (1998)", "A Perfect Murder (1998)", "Lady Bird", "The Man from Earth", "Perfect Blue", "The Aviator", "Nightcrawler", "The Social Network", "The Thing", "Rango"], "removed": [], "watched": ["Parasite", "Pulp Fiction", "The Lord of the Rings: The Return of the King", "Spirited Away", "Fight Club", "Inception", "Forrest Gump"], "history": []};
+const KEY='cinepick-v1';
+let state;
+try { state=JSON.parse(localStorage.getItem(KEY)) || initial; } catch(e){ state=initial; }
+state.movies=Array.isArray(state.movies)?state.movies:initial.movies;
+state.removed=Array.isArray(state.removed)?state.removed:[];
+state.watched=Array.isArray(state.watched)?state.watched:initial.watched;
+state.history=Array.isArray(state.history)?state.history:[];
+let current=null, spinning=false, rotation=0;
+const $=id=>document.getElementById(id);
+const colors=['#8c5cff','#e65b9e','#3e9bc9','#e8a64c','#48a999','#b66bd6','#d65b64','#6876d8','#a6a04e','#ce7c53'];
+function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+function norm(s){return s.trim().toLocaleLowerCase();}
+function activeMovies(){return state.movies.filter(m=>!state.removed.some(x=>norm(x)===norm(m)) && (!$('excludeWatched').checked || !state.watched.some(x=>norm(x)===norm(m))));}
+function drawWheel(){
+ const c=$('canvas'),ctx=c.getContext('2d'),n=Math.max(1,activeMovies().length),items=activeMovies(),cx=c.width/2,cy=c.height/2,r=c.width/2-4;
+ ctx.clearRect(0,0,c.width,c.height);
+ if(!items.length){ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle='#252338';ctx.fill();ctx.fillStyle='#d8d1ef';ctx.font='bold 28px sans-serif';ctx.textAlign='center';ctx.fillText('ADD MOVIES',cx,cy);return;}
+ const step=2*Math.PI/n;
+ items.forEach((name,i)=>{let a=-Math.PI/2+i*step;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,a,a+step);ctx.closePath();ctx.fillStyle=colors[i%colors.length];ctx.fill();ctx.strokeStyle='#171522';ctx.lineWidth=2;ctx.stroke();
+ if(n<=34){ctx.save();ctx.translate(cx,cy);ctx.rotate(a+step/2);ctx.textAlign='right';ctx.fillStyle='#fff';ctx.font=`${n>22?12:n>14?14:17}px sans-serif`;let label=name.length>22?name.slice(0,20)+'…':name;ctx.shadowColor='#0008';ctx.shadowBlur=3;ctx.fillText(label,r-20,5);ctx.restore();}
+ });
+}
+function render(){
+ const avail=activeMovies();$('total').textContent=state.movies.length;$('available').textContent=avail.length;$('removedCount').textContent=state.removed.length;
+ $('listCount').textContent=`(${state.movies.length})`;
+ const q=norm($('search').value||'');const list=$('movieList');list.innerHTML='';
+ const visible=state.movies.filter(m=>!q||norm(m).includes(q));
+ if(!visible.length){list.innerHTML='<div class="empty">No matching movies.</div>';} else visible.forEach(m=>{
+  const isRemoved=state.removed.some(x=>norm(x)===norm(m)),isWatched=state.watched.some(x=>norm(x)===norm(m));
+  const row=document.createElement('div');row.className='movieitem';
+  const title=document.createElement('span');title.className='title';title.textContent=m;row.appendChild(title);
+  if(isWatched){const tag=document.createElement('span');tag.className='tag';tag.textContent='WATCHED';row.appendChild(tag);}
+  if(isRemoved){const tag=document.createElement('span');tag.className='tag';tag.textContent='REMOVED';row.appendChild(tag);}
+  const btn=document.createElement('button');btn.className='remove';btn.title=isRemoved?'Restore movie':'Remove movie';btn.textContent=isRemoved?'↩':'×';btn.onclick=()=>{if(isRemoved)state.removed=state.removed.filter(x=>norm(x)!==norm(m));else state.removed.push(m);save();render();};row.appendChild(btn);list.appendChild(row);
+ });
+ const hist=$('history');hist.innerHTML='';
+ if(!state.history.length)hist.innerHTML='<div class="empty">Your spins will appear here.</div>';
+ state.history.slice().reverse().slice(0,20).forEach((m,i)=>{const row=document.createElement('div');row.className='historyitem';const num=document.createElement('span');num.textContent=String(state.history.length-i).padStart(2,'0');const name=document.createElement('b');name.textContent=m.title;const restore=document.createElement('button');restore.textContent='↩';restore.title='Restore to collection';restore.onclick=()=>{if(!state.movies.some(x=>norm(x)===norm(m.title)))state.movies.push(m.title);state.removed=state.removed.filter(x=>norm(x)!==norm(m.title));save();render();};row.append(num,name,restore);hist.appendChild(row);});
+ $('spin').disabled=spinning||avail.length===0;drawWheel();save();
+}
+function addMovies(names){
+ let added=0,duplicates=0;
+ names.forEach(raw=>{let m=String(raw).replace(/^\s*[\[\(]?\s*[vVxX ]\s*[\]\)]?\s*/,'').replace(/^\s*\d+\.\s*/,'').trim();if(!m)return;if(state.movies.some(x=>norm(x)===norm(m))){duplicates++;return;}state.movies.push(m);added++;});
+ render();$('hint').textContent=added?`Added ${added} movie${added===1?'':'s'}${duplicates?`; skipped ${duplicates} duplicate${duplicates===1?'':'s'}`:''}.`:'No new movie titles found.';
+}
+function spin(){
+ const items=activeMovies();if(spinning||!items.length)return;
+ current=items[Math.floor(Math.random()*items.length)];spinning=true;$('spin').disabled=true;$('result').classList.remove('show');$('hint').textContent='The wheel is spinning…';
+ const idx=items.findIndex(x=>norm(x)===norm(current));const step=360/items.length;
+ // Pointer at top; center of selected slice should land at 12 o'clock.
+ const target=(360-(idx*step+step/2))%360;
+ const currentMod=((rotation%360)+360)%360;
+ const delta=(target-currentMod+360)%360;
+ rotation += 360*5+delta;
+ $('wheel').style.transform=`rotate(${rotation}deg)`;
+ setTimeout(()=>{spinning=false;$('winner').textContent=current;$('result').classList.add('show');$('hint').textContent='Fate has picked. What do you want to do?';state.history.push({title:current,at:new Date().toISOString()});render();$('result').classList.add('show');},4450);
+}
+function settle(remove){
+ if(!current)return;
+ if(remove&&!state.removed.some(x=>norm(x)===norm(current)))state.removed.push(current);
+ $('resultNote').textContent=remove?`${current} has been removed from the roulette.`:`${current} stays in your collection.`;
+ current=null;save();render();$('result').classList.add('show');
+}
+$('spin').onclick=spin;$('again').onclick=()=>{ $('result').classList.remove('show');spin();};
+$('keep').onclick=()=>settle(false);$('remove').onclick=()=>settle(true);
+$('add').onclick=()=>{const v=$('newMovie').value.trim();if(v){addMovies([v]);$('newMovie').value='';}};
+$('newMovie').addEventListener('keydown',e=>{if(e.key==='Enter')$('add').click();});
+$('search').addEventListener('input',render);$('excludeWatched').addEventListener('change',()=>{ $('result').classList.remove('show');render();});
+$('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;const txt=await f.text();let lines=txt.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);if(/\.csv$|\.tsv$/i.test(f.name))lines=lines.map(line=>{let first=line.split(f.name.toLowerCase().endsWith('.tsv')?'\t':',')[0].trim();return first.replace(/^"|"$/g,'').replace(/""/g,'"');}).filter(x=>x.toLowerCase()!=='title'&&x.toLowerCase()!=='movie');addMovies(lines);e.target.value='';});
+$('restore').onclick=()=>{state.removed=[];save();render();$('hint').textContent='All removed movies restored.';};
+$('clearRemoved').onclick=()=>{state.movies=state.movies.filter(m=>!state.removed.some(x=>norm(x)===norm(m)));state.removed=[];save();render();};
+$('resetHistory').onclick=()=>{state.history=[];save();render();};
+$('export').onclick=()=>{const blob=new Blob([state.movies.map(m=>(state.watched.some(x=>norm(x)===norm(m))?'[v] ':'[ ] ')+m).join('\n')],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='cinepick-movie-list.txt';a.click();URL.revokeObjectURL(a.href);};
+render();
+
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(() => {});
+  });
+}
+
+</script></body></html>

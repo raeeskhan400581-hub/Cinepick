@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "CinePick \u2014 Movie Roulette",
+  "short_name": "CinePick",
+  "description": "Your personal offline movie roulette.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#160d2b",
+  "theme_color": "#160d2b",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
