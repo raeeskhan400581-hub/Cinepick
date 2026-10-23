@@ -101,6 +101,26 @@ button,input{font:inherit}button{cursor:pointer;border:0;font-weight:750;transit
 .intel-warning{font-size:10px;color:#d7c8ff;line-height:1.5;margin-top:9px}
 @media(max-width:420px){.intel-grid{grid-template-columns:1fr}}
 
+
+/* Cosmic Vortex v5: legible poster orbit + cinematic winner emergence */
+.vortex-reveal{width:clamp(142px,49%,194px);gap:8px;filter:drop-shadow(0 0 28px #a45cffcc)}
+.vortex-reveal-glow{inset:-42px -28px -26px;background:radial-gradient(ellipse,#e0b5ff66 0%,#6e8fff38 38%,#9a35ff1c 58%,transparent 74%)}
+.vortex-reveal img{border:2px solid #f0ddff;box-shadow:0 0 0 4px #814dce99,0 0 34px #a45affcc,0 0 72px #4d8dff55}
+.vortex-reveal.active{animation:cosmicWinnerArrival 1.05s cubic-bezier(.16,1,.3,1) both}
+.vortex-reveal.active .vortex-reveal-title{animation:cosmicTitleArrival .55s .28s both}
+.wheelwrap.has-winner:before{opacity:1;filter:blur(10px) brightness(1.9)}
+.wheelwrap.has-winner:after{border-color:#e3c4ff;box-shadow:0 0 56px #a34dff,inset 0 0 48px #3d9bff88}
+.wheelwrap.has-winner .wheel{filter:brightness(.38) saturate(.7);transition:filter .5s}
+@keyframes cosmicWinnerArrival{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.12) rotate(-12deg);filter:brightness(3.2) blur(10px)}
+  38%{opacity:1;transform:translate(-50%,-50%) scale(.82) rotate(4deg);filter:brightness(2) blur(1px)}
+  64%{opacity:1;transform:translate(-50%,-50%) scale(1.09) rotate(-2deg);filter:brightness(1.35) blur(0)}
+  82%{transform:translate(-50%,-50%) scale(.97) rotate(1deg)}
+  100%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0);filter:brightness(1)}
+}
+@keyframes cosmicTitleArrival{from{opacity:0;transform:translateY(12px);letter-spacing:2px}to{opacity:1;transform:translateY(0);letter-spacing:0}}
+@media(max-width:420px){.vortex-reveal{width:clamp(128px,48%,166px)}}
+
 </style></head>
 <body><div class="wrap">
 <header><div class="brand"><div class="logo">🎬</div><div><h1>CinePick</h1><p>YOUR NEXT MOVIE, LEFT TO CHANCE</p></div></div><div class="pill">✦ PERSONAL MOVIE ROULETTE</div></header>
@@ -183,12 +203,23 @@ function drawWheel(){
  for(let j=0;j<5;j++){ctx.beginPath();ctx.ellipse(0,0,92+j*49,92+j*49,0,0,Math.PI*2);ctx.strokeStyle=['#b76aff77','#4ccfff66','#ed75ff55','#8270ff55','#69d9ff33'][j];ctx.lineWidth=j===1?5:2;ctx.shadowBlur=j===1?16:8;ctx.shadowColor=ctx.strokeStyle;ctx.stroke();}
  ctx.restore();ctx.shadowBlur=0;
  if(!items.length){ctx.fillStyle='#ded3ff';ctx.font='bold 26px sans-serif';ctx.textAlign='center';ctx.fillText('ADD MOVIES',cx,cy);return;}
- // Poster-like tiles orbit the void. They stay associated with each fair random slice.
- const cardW=n>22?46:n>14?54:62,cardH=cardW*1.43,orbit=R*.68;
- items.forEach((name,i)=>{
-   const base=-Math.PI/2+i*step+step/2;
+ // Show EVERY active movie: use multiple concentric orbital lanes for larger collections.
+ // No duplicated display cards; the winner is still selected from the full active movie list.
+ const displayItems=items;
+ const ringCount=Math.max(1,Math.ceil(displayItems.length/12));
+ const cardW=Math.max(22,Math.min(78,Math.floor(250/Math.sqrt(Math.max(1,displayItems.length))))),cardH=cardW*1.43;
+ const ringGap=Math.min(cardW*1.12,Math.max(26,R*.16));
+ const ringRadii=Array.from({length:ringCount},(_,r)=>Math.min(R-cardW*.72,Math.max(108,R*.35)+r*ringGap));
+ displayItems.forEach((name,i)=>{
+   const perRing=Math.ceil(displayItems.length/ringCount);
+   const ringIndex=Math.min(ringCount-1,Math.floor(i/perRing));
+   const indexInRing=i-ringIndex*perRing;
+   const itemsInRing=Math.min(perRing,displayItems.length-ringIndex*perRing);
+   const displayStep=Math.PI*2/Math.max(1,itemsInRing);
+   const base=-Math.PI/2+indexInRing*displayStep+displayStep/2;
    const chaos=vortexMotion.chaos,collapse=vortexMotion.collapse;
-   const a=base+vortexMotion.angle+Math.sin(base*3+vortexMotion.pulse)*chaos*.23;
+   const a=base+vortexMotion.angle*(1+ringIndex*.08)+Math.sin(base*3+vortexMotion.pulse+ringIndex)*chaos*.23;
+   const orbit=ringRadii[ringIndex];
    const orbitNow=orbit*(1-collapse*.47)+(Math.sin(base*2+vortexMotion.pulse)*chaos*18);
    const x=cx+Math.cos(a)*orbitNow,y=cy+Math.sin(a)*orbitNow;
    const depth=.76+.24*(Math.sin(a)+1)/2;
@@ -206,8 +237,8 @@ function drawWheel(){
    }else{
      ctx.fillStyle=i%2?'#b88aff':'#6bdfff';ctx.globalAlpha=.75;ctx.beginPath();ctx.arc(0,-cardH*.2,cardW*.18,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
      ctx.strokeStyle='#ffffff55';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-cardW*.3,cardH*.08);ctx.lineTo(cardW*.3,cardH*.08);ctx.stroke();
-     ctx.fillStyle='#f8f3ff';ctx.textAlign='center';ctx.font=`bold ${n>20?7:8}px system-ui,sans-serif`;
-     const words=String(name).split(/\s+/);let line='',lines=[];for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>cardW-8&&line){lines.push(line);line=word;}else line=test;}if(line)lines.push(line);lines.slice(0,4).forEach((t,j)=>ctx.fillText(t,0,cardH*.18+j*9));
+     ctx.fillStyle='#f8f3ff';ctx.textAlign='center';ctx.font=`bold ${cardW<32?6:cardW<42?7:n>14?8:n>10?9:11}px system-ui,sans-serif`;
+     const words=String(name).split(/\s+/);let line='',lines=[];for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>cardW-8&&line){lines.push(line);line=word;}else line=test;}if(line)lines.push(line);lines.slice(0,5).forEach((t,j)=>ctx.fillText(t,0,cardH*.12+j*12));
    }
    // Small glowing orbit pin
    ctx.fillStyle='#f4dcff';ctx.shadowColor='#bc70ff';ctx.shadowBlur=9;ctx.beginPath();ctx.arc(0,-cardH/2+3,2.2,0,Math.PI*2);ctx.fill();ctx.restore();
@@ -412,12 +443,12 @@ function showVortexReveal(movie){
  if(!reveal||!movie)return;
  title.textContent=movie;
  const details=state.details[movie]||{};
- const poster=details.poster||'';
+ const poster=details.poster||details.posterUrl||details.posterURL||details.poster_path||'';
  reveal.classList.remove('active','has-poster','no-poster');
  reveal.classList.add(poster?'has-poster':'no-poster');
  img.onload=()=>{reveal.classList.add('has-poster');reveal.classList.remove('no-poster');};
  img.onerror=()=>{reveal.classList.remove('has-poster');reveal.classList.add('no-poster');img.removeAttribute('src');};
- if(poster){img.src=poster;}else{img.removeAttribute('src');}
+ if(poster){img.src=String(poster).startsWith('/')?'https://image.tmdb.org/t/p/w500'+poster:poster;}else{img.removeAttribute('src');}
  reveal.classList.add('active');
  $('vortex').classList.add('has-winner');
 }
